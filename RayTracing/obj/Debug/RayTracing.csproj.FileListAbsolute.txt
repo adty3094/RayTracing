@@ -1,1 +1,6 @@
 D:\College Document\Semester 7\TKIGS\RayTracing\RayTracing\bin\Debug\RayTracing.exe.config
+D:\College Document\Semester 7\TKIGS\RayTracing\RayTracing\obj\Debug\RayTracing.csprojResolveAssemblyReference.cache
+D:\College Document\Semester 7\TKIGS\RayTracing\RayTracing\bin\Debug\RayTracing.exe
+D:\College Document\Semester 7\TKIGS\RayTracing\RayTracing\bin\Debug\RayTracing.pdb
+D:\College Document\Semester 7\TKIGS\RayTracing\RayTracing\obj\Debug\RayTracing.exe
+D:\College Document\Semester 7\TKIGS\RayTracing\RayTracing\obj\Debug\RayTracing.pdb

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace RayTracing
 {
-    class Vector
+    public class Vector
     {
         double x, y, z;
-        double normalize;
 
         public Vector()
         {
@@ -28,22 +27,47 @@ namespace RayTracing
             this.z = z;
         }
 
-        public void NormalizeCalculation()
+        public double Normalize()
         {
-            normalize = Math.Sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+            return Math.Sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
         }
 
-        public double DotProduct(Vector u, Vector v)
+        public void PrintVector()
+        {
+            Console.WriteLine(string.Format("{0} {1} {2}", this.x, this.y, this.z));
+        }
+
+        public static double DotProduct(Vector u, Vector v)
         {
             return u.x * v.x + u.y * v.y + u.z * v.z;
         }
 
-        public Vector CrossProduct(Vector u, Vector v)
+        public static Vector CrossProduct(Vector u, Vector v)
         {
             Vector crossProduct = new Vector(u.y * v.z - u.z * v.y,
                                              u.z * v.x - u.x * v.z,
                                              u.x * v.y - u.y * v.x);
             return crossProduct;
+        }
+
+        public static Vector operator+(Vector u, Vector v)
+        {
+            return new Vector(u.x + v.x, u.y + v.y, u.z + v.z);
+        }
+
+        public static Vector operator -(Vector u, Vector v)
+        {
+            return new Vector(u.x - v.x, u.y - v.y, u.z - v.z);
+        }
+
+        public static Vector operator*(Vector u, double n)
+        {
+            return new Vector(u.x * n, u.y * n, u.z * n);
+        }
+
+        public static Vector operator/(Vector u, double n)
+        {
+            return new Vector(u.x / n, u.y / n, u.z / n);
         }
     }
 }
