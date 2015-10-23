@@ -26,7 +26,7 @@ namespace RayTracing
             this.up = new Vector(UpX, UpY, UpZ);
             this.fovy = fovy;
             CalculateUVW();
-            this.fovx = Func.RadianToDegree(Math.Atan(CalculateFOVX()));
+            this.fovx = Func.RadianToDegree(Math.Atan(CalculateFOVX()))*2;
         }
 
         private void CalculateUVW()
@@ -40,7 +40,7 @@ namespace RayTracing
 
         private double CalculateFOVX()
         {
-            return (Screen.height / Screen.width) * (Math.Tan(Func.DegreeToRadian(this.fovy))); 
+            return (Screen.height / Screen.width) * (Math.Tan(Func.DegreeToRadian(this.fovy/2))); 
         }
 
         public Vector GetVectorU()
