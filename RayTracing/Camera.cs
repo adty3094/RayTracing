@@ -11,44 +11,61 @@ namespace RayTracing
         private Vector lookFrom; 
         private Vector lookAt;
         private Vector up;
-        private double fov;
+        private double fovy;
+        private double fovx;
 
         private Vector u, v, w;
 
         public Camera(double LookFromX, double LookFromY, double LookFromZ,
                double LookAtX, double LookAtY, double LookAtZ,
                double UpX, double UpY, double UpZ, 
-               double fov)
+               double fovy)
         {
             this.lookFrom = new Vector(LookFromX, LookFromY, LookFromZ);
             this.lookAt = new Vector(LookAtX, LookAtY, LookAtZ);
             this.up = new Vector(UpX, UpY, UpZ);
-            this.fov = fov;
+            this.fovy = fovy;
             CalculateUVW();
+            this.fovx = Func.RadianToDegree(Math.Atan(CalculateFOVX()));
         }
 
-        public void CalculateUVW()
+        private void CalculateUVW()
         {
             Vector a = lookFrom - lookAt;
             Vector b = up;
-            w = a / a.Normalize();
-            u = Vector.CrossProduct(b, w) / Vector.CrossProduct(b, w).Normalize();
-            v = Vector.CrossProduct(w, u);
+            this.w = a / a.Normalize();
+            this.u = Vector.CrossProduct(b, this.w) / Vector.CrossProduct(b, this.w).Normalize();
+            this.v = Vector.CrossProduct(this.w, this.u);
+        }
+
+        private double CalculateFOVX()
+        {
+            return (Screen.height / Screen.width) * (Math.Tan(Func.DegreeToRadian(this.fovy))); 
         }
 
         public Vector GetVectorU()
         {
-            return u;
+            return this.u;
         }
 
         public Vector GetVectorV()
         {
-            return v;
+            return this.v;
         }
 
         public Vector GetVectorW()
         {
-            return w;
+            return this.w;
+        }
+
+        public double GetFOVX()
+        {
+            return this.fovx;
+        }
+
+        public double GetFOVY()
+        {
+            return this.fovy;
         }
     }
 }
