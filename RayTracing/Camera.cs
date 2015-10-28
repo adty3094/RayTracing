@@ -29,6 +29,21 @@ namespace RayTracing
             this.fovx = Func.RadianToDegree(Math.Atan(CalculateFOVX()))*2;
         }
 
+        public Vector GetLookFrom()
+        {
+            return this.lookFrom;
+        }
+
+        public Vector GetLookAt()
+        {
+            return this.lookAt;
+        }
+
+        public Vector GetUp()
+        {
+            return this.up;
+        }
+
         private void CalculateUVW()
         {
             Vector a = lookFrom - lookAt;

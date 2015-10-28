@@ -60,12 +60,22 @@ namespace RayTracing
             return new Vector(u.x - v.x, u.y - v.y, u.z - v.z);
         }
 
+        public static Vector operator*(double n,Vector u)
+        {
+            return new Vector(u.x * n, u.y * n, u.z * n);
+        }
+
         public static Vector operator*(Vector u, double n)
         {
             return new Vector(u.x * n, u.y * n, u.z * n);
         }
 
         public static Vector operator/(Vector u, double n)
+        {
+            return new Vector(u.x / n, u.y / n, u.z / n);
+        }
+
+        public static Vector operator /(double n, Vector u)
         {
             return new Vector(u.x / n, u.y / n, u.z / n);
         }
