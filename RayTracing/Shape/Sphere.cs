@@ -40,19 +40,16 @@ namespace RayTracing
                 if (t[0] > 0 && t[1] > 0)
                 {
                     ray.IntersectDistance = Math.Min(t[0], t[1]);
-                    ray.IntersectWith = this;
                     return true;
                 }
                 else if (t[0] < 0 && t[1] > 0)
                 {
                     ray.IntersectDistance = t[1];
-                    ray.IntersectWith = this;
                     return true;
                 }
                 else if (t[0] > 0 && t[1] < 0)
                 {
                     ray.IntersectDistance = t[0];
-                    ray.IntersectWith = this;
                     return true;
                 }
                 else return false;

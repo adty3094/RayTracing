@@ -29,9 +29,9 @@ namespace RayTracing
             set { intersectDistance = value; }
         }
 
-        private object intersectWith;
+        private Object intersectWith;
 
-        public object IntersectWith
+        public Object IntersectWith
         {
             get { return intersectWith; }
             set { intersectWith = value; }

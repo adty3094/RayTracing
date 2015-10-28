@@ -25,7 +25,7 @@ namespace RayTracing
             double beta = Math.Tan(DegreeToRadian(cam.GetFOVY()) / 2) * ((Screen.height / 2) - i) / (Screen.height / 2);
             Vector position = cam.GetLookFrom();
             Vector temp = (cam.GetVectorU() * alpha + cam.GetVectorV() * beta - cam.GetVectorW() );
-            Vector direction = temp / temp.Normalize();
+            Vector direction = temp / temp.Distance();
             return new Ray(position, direction);
         }
 
@@ -35,7 +35,10 @@ namespace RayTracing
             foreach(Object obj in scene.ObjectList)
             {
                 if (obj.IsIntersect(ref ray) && ray.IntersectDistance < mindist)
+                {
                     mindist = ray.IntersectDistance;
+                    ray.IntersectWith = obj;
+                }
             }
         }
 
@@ -48,7 +51,7 @@ namespace RayTracing
                 {
                     Ray ray = RayThruPixels(scene.Camera, i, j);
                     Intersection(ref ray, scene);
-                    bmp.SetPixel(i, j, ray.Color);
+                    bmp.SetPixel(i, j,ray.IntersectWith.Color);
                 }
             }
             return bmp;

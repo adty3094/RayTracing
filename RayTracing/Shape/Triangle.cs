@@ -23,7 +23,7 @@ namespace RayTracing
         public override bool IsIntersect(ref Ray ray)
         {
             Vector temp = Vector.CrossProduct((this.pointC - this.pointA),(this.pointB - this.pointA));
-            Vector n = temp / temp.Normalize();
+            Vector n = temp / temp.Distance();
             double a = Vector.DotProduct(this.pointA, n);
             double b = Vector.DotProduct(ray.GetPosition(), n);
             double c = Vector.DotProduct(ray.GetDirection(), n);

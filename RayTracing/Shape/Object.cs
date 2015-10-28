@@ -11,6 +11,13 @@ namespace RayTracing
     {
         private Color color;
 
+        public Color Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
+
         public Object(Color color)
         {
             this.color = color;

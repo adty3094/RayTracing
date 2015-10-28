@@ -48,8 +48,8 @@ namespace RayTracing
         {
             Vector a = lookFrom - lookAt;
             Vector b = up;
-            this.w = a / a.Normalize();
-            this.u = Vector.CrossProduct(b, this.w) / Vector.CrossProduct(b, this.w).Normalize();
+            this.w = a / a.Distance();
+            this.u = Vector.CrossProduct(b, this.w) / Vector.CrossProduct(b, this.w).Distance();
             this.v = Vector.CrossProduct(this.w, this.u);
         }
 

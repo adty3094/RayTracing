@@ -27,7 +27,7 @@ namespace RayTracing
             this.z = z;
         }
 
-        public double Normalize()
+        public double Distance()
         {
             return Math.Sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
         }
