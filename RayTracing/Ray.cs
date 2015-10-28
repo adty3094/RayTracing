@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace RayTracing
 {
@@ -10,13 +11,33 @@ namespace RayTracing
     {
         private Vector position;
         private Vector direction;
+        private Color color;
+        private double intersectDistance;
+
+        public double IntersectDistance
+        {
+            get { return intersectDistance; }
+            set { intersectDistance = value; }
+        }
+
+        private object intersectWith;
+
+        public object IntersectWith
+        {
+            get { return intersectWith; }
+            set { intersectWith = value; }
+        }
+
 
         public Ray()
         { }
 
         public Ray(Vector position, Vector direction)
         {
-
+            this.position = position;
+            this.direction = direction;
+            this.intersectDistance = double.MaxValue;
+            this.intersectWith = null;
         }
 
         public void SetPosition(Vector position)

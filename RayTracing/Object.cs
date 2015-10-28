@@ -10,6 +10,11 @@ namespace RayTracing
     abstract class Object
     {
         private Color color;
-        public virtual double IntersectObject();
+
+        public Object(Color color)
+        {
+            this.color = color;
+        }
+        public abstract bool IsIntersect(ref Ray ray);
     }
 }

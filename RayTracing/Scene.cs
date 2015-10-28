@@ -15,6 +15,9 @@ namespace RayTracing
 
         }
 
-        public void AddObject
+        public void AddObject(Object obj)
+        {
+            this.listObject.Add(obj);
+        }
     }
 }
