@@ -46,7 +46,7 @@ namespace RayTracing
             this.position = position;
             this.direction = direction;
             this.intersectDistance = double.MaxValue;
-            this.intersectWith = null;
+            this.IntersectWith = null;
             this.color = Color.FromArgb(0, 0, 0);
         }
 

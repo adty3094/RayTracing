@@ -12,7 +12,7 @@ namespace RayTracing
         Vector center;
         double radius;
 
-        public Sphere(Vector center, double radius, Color color) : base(color)
+        public Sphere(Vector center, double radius)
         {
             this.center = center;
             this.radius = radius;
@@ -27,7 +27,6 @@ namespace RayTracing
             if (a == 0)
             {
                 ray.IntersectDistance = -c / b;
-                ray.IntersectWith = this;
                 return true;
             }
             else if (D < 0)

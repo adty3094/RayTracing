@@ -44,14 +44,18 @@ namespace RayTracing
 
         public static Bitmap RayTrace(Scene scene)
         {
-            Bitmap bmp = new Bitmap(Screen.width, Screen.height);
+            Bitmap bmp = new Bitmap(Screen.width,Screen.height);
             for(int i = 0; i < Screen.height; i++)
             {
-                for(int j = 0; j < Screen.width; j++)
+                for (int j = 0; j < Screen.width; j++)
                 {
                     Ray ray = RayThruPixels(scene.Camera, i, j);
                     Intersection(ref ray, scene);
-                    bmp.SetPixel(i, j,ray.IntersectWith.Color);
+                    if (ray.IntersectWith != null)
+                    {
+                        Console.WriteLine("Hai");
+                        bmp.SetPixel(i, j, ray.IntersectWith.Color);
+                    }
                 }
             }
             return bmp;

@@ -18,9 +18,9 @@ namespace RayTracing
         }
 
 
-        public Object(Color color)
+        public Object()
         {
-            this.color = color;
+            Color = Color.Red;
         }
         public abstract bool IsIntersect(ref Ray ray);
     }

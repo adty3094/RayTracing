@@ -13,7 +13,7 @@ namespace RayTracing
         private Vector pointB;
         private Vector pointC;
 
-        public Triangle(Vector pointA, Vector pointB, Vector pointC, Color color) : base(color)
+        public Triangle(Vector pointA, Vector pointB, Vector pointC)
         {
             this.pointA = pointA;
             this.pointB = pointB;

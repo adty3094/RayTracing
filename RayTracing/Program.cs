@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,18 +12,17 @@ namespace RayTracing
     {
         static void Main(string[] args)
         {
-            Screen.width = 360;
-            Screen.height = 360;
-            Scene scene = new Scene(new Camera(0, 0, 4,
-                                               0, 0, 0,
-                                               0, 1, 0,
-                                               45));
-            scene.Camera.GetVectorU().PrintVector();
-            scene.Camera.GetVectorV().PrintVector();
-            scene.Camera.GetVectorW().PrintVector();
-            Console.WriteLine(scene.Camera.GetFOVX());
-            Console.WriteLine(scene.Camera.GetFOVY());
-            Console.ReadLine();
+            string inputFile = "scene1.test";
+            string outputFile = "hore.bmp";
+
+            if(File.Exists(inputFile))
+            {
+                Scene scene = new Scene(inputFile);
+                Bitmap output = new Bitmap(Func.RayTrace(scene));
+                output.Save(outputFile);
+            }
+            Console.WriteLine("Udah slese bro");
+            Console.ReadKey();
         }
     }
 }
