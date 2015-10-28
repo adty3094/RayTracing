@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RayTracing
 {
-    class Sphere : Object
+    public class Sphere : Object
     {
         Vector center;
         double radius;

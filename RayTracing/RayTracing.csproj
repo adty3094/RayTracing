@@ -43,15 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
-    <Compile Include="Func.cs" />
-    <Compile Include="Object.cs" />
+    <Compile Include="Common\Func.cs" />
+    <Compile Include="Shape\Object.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ray.cs" />
     <Compile Include="Scene.cs" />
-    <Compile Include="Screen.cs" />
-    <Compile Include="Sphere.cs" />
-    <Compile Include="Vector.cs" />
+    <Compile Include="Common\Screen.cs" />
+    <Compile Include="Shape\Sphere.cs" />
+    <Compile Include="Shape\Triangle.cs" />
+    <Compile Include="Data Type\Vector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

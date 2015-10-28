@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RayTracing
 {
-    class Triangle : Object
+    public class Triangle : Object
     {
         private Vector pointA;
         private Vector pointB;

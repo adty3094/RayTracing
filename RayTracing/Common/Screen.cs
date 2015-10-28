@@ -8,7 +8,7 @@ namespace RayTracing
 {
     public static class Screen
     {
-        public static double width = 0;
-        public static double height = 0;
+        public static int width = 0;
+        public static int height = 0;
     }
 }

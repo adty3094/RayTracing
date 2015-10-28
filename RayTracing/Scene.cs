@@ -6,18 +6,34 @@ using System.Threading.Tasks;
 
 namespace RayTracing
 {
-    class Scene
+    public class Scene
     {
-        private List<Object> listObject;
-        
-        public Scene()
-        {
+        private List<Object> objectList;
 
+        public List<Object> ObjectList
+        {
+            get { return objectList; }
+            set { objectList = value; }
+        }
+
+        private Camera camera;
+
+        public Camera Camera
+        {
+            get { return camera; }
+            set { camera = value; }
+        }
+
+
+
+        public Scene(Camera cam)
+        {
+            this.camera = cam;
         }
 
         public void AddObject(Object obj)
         {
-            this.listObject.Add(obj);
+            this.objectList.Add(obj);
         }
     }
 }

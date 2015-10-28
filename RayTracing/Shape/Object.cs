@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace RayTracing
 {
-    abstract class Object
+    public abstract class Object
     {
         private Color color;
 

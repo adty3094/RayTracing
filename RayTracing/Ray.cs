@@ -7,11 +7,20 @@ using System.Drawing;
 
 namespace RayTracing
 {
-    class Ray
+    public class Ray
     {
         private Vector position;
         private Vector direction;
         private Color color;
+
+        public Color Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
+
+
         private double intersectDistance;
 
         public double IntersectDistance
@@ -38,6 +47,7 @@ namespace RayTracing
             this.direction = direction;
             this.intersectDistance = double.MaxValue;
             this.intersectWith = null;
+            this.color = Color.FromArgb(0, 0, 0);
         }
 
         public void SetPosition(Vector position)

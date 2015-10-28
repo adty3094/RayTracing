@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RayTracing
 {
-    class Camera
+    public class Camera
     {
         private Vector lookFrom; 
         private Vector lookAt;

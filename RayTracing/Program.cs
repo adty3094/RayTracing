@@ -12,15 +12,15 @@ namespace RayTracing
         {
             Screen.width = 360;
             Screen.height = 360;
-            Camera c = new Camera(0, 0, 4,
-                                  0, 0, 0,
-                                  0, 1, 0,
-                                  45);
-            c.GetVectorU().PrintVector();
-            c.GetVectorV().PrintVector();
-            c.GetVectorW().PrintVector();
-            Console.WriteLine(c.GetFOVX());
-            Console.WriteLine(c.GetFOVY());
+            Scene scene = new Scene(new Camera(0, 0, 4,
+                                               0, 0, 0,
+                                               0, 1, 0,
+                                               45));
+            scene.Camera.GetVectorU().PrintVector();
+            scene.Camera.GetVectorV().PrintVector();
+            scene.Camera.GetVectorW().PrintVector();
+            Console.WriteLine(scene.Camera.GetFOVX());
+            Console.WriteLine(scene.Camera.GetFOVY());
             Console.ReadLine();
         }
     }

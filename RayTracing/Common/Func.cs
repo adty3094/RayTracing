@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace RayTracing
 {
@@ -26,6 +27,31 @@ namespace RayTracing
             Vector temp = (cam.GetVectorU() * alpha + cam.GetVectorV() * beta - cam.GetVectorW() );
             Vector direction = temp / temp.Normalize();
             return new Ray(position, direction);
+        }
+
+        public static void Intersection(ref Ray ray, Scene scene)
+        {
+            double mindist = double.MaxValue;
+            foreach(Object obj in scene.ObjectList)
+            {
+                if (obj.IsIntersect(ref ray) && ray.IntersectDistance < mindist)
+                    mindist = ray.IntersectDistance;
+            }
+        }
+
+        public static Bitmap RayTrace(Scene scene)
+        {
+            Bitmap bmp = new Bitmap(Screen.width, Screen.height);
+            for(int i = 0; i < Screen.height; i++)
+            {
+                for(int j = 0; j < Screen.width; j++)
+                {
+                    Ray ray = RayThruPixels(scene.Camera, i, j);
+                    Intersection(ref ray, scene);
+                    bmp.SetPixel(i, j, ray.Color);
+                }
+            }
+            return bmp;
         }
     }
 }
