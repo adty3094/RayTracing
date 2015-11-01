@@ -56,5 +56,10 @@ namespace RayTracing
 
             return (u >= 0) && (v >= 0) && (u + v < 1);
         }
+
+        public override void GetObjectType()
+        {
+            Console.WriteLine("This is Triangle");
+        }
     }
 }

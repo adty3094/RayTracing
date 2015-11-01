@@ -55,5 +55,10 @@ namespace RayTracing
             }
             
         }
+
+        public override void GetObjectType()
+        {
+            Console.WriteLine("This is Sphere");
+        }
     }
 }

@@ -23,5 +23,6 @@ namespace RayTracing
             Color = Color.Red;
         }
         public abstract bool IsIntersect(ref Ray ray);
+        public abstract void GetObjectType();
     }
 }

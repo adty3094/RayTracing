@@ -18,6 +18,7 @@ namespace RayTracing
             if(File.Exists(inputFile))
             {
                 Scene scene = new Scene(inputFile);
+                //scene.PrintContent();
                 Bitmap output = new Bitmap(Func.RayTrace(scene));
                 output.Save(outputFile);
             }

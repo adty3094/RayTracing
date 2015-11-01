@@ -29,7 +29,7 @@ namespace RayTracing
             return new Ray(position, direction);
         }
 
-        public static void Intersection(ref Ray ray, Scene scene)
+        public static Ray Intersection(Ray ray, Scene scene)
         {
             double mindist = double.MaxValue;
             foreach(Object obj in scene.ObjectList)
@@ -40,6 +40,8 @@ namespace RayTracing
                     ray.IntersectWith = obj;
                 }
             }
+            ray.IntersectDistance = mindist;
+            return ray;
         }
 
         public static Bitmap RayTrace(Scene scene)
@@ -50,15 +52,17 @@ namespace RayTracing
                 for (int j = 0; j < Screen.width; j++)
                 {
                     Ray ray = RayThruPixels(scene.Camera, i, j);
-                    Intersection(ref ray, scene);
+                    Intersection(ray, scene);
+                    //ray.GetInformation();
                     if (ray.IntersectWith != null)
                     {
-                        Console.WriteLine("Hai");
-                        bmp.SetPixel(i, j, ray.IntersectWith.Color);
+                        bmp.SetPixel(j, i, ray.IntersectWith.Color);
                     }
+                    else
+                        bmp.SetPixel(j, i, Color.Black);
                 }
             }
             return bmp;
         }
     }
-}
+}   

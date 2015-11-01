@@ -69,5 +69,16 @@ namespace RayTracing
         {
             return this.direction;
         }
+         
+        public void GetInformation()
+        {
+            Console.WriteLine("===================================================");
+            Console.Write("Ray position:  "); this.GetPosition().PrintVector();
+            Console.Write("Ray Direction: "); this.GetDirection().PrintVector();
+            Console.WriteLine("Ray Intersect Distance: "+this.IntersectDistance);
+            Console.WriteLine("Ray Intersect With: " + this.IntersectWith);
+            Console.WriteLine("===================================================");
+            Console.WriteLine();
+        }
     }
 }

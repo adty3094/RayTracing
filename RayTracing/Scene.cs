@@ -28,6 +28,7 @@ namespace RayTracing
 
         public Scene(String inputFile)
         {
+            Console.WriteLine("Masuk constructor Scene");
             objectList = new List<Object>();
             StreamReader file = new StreamReader(inputFile);
             String command;
@@ -50,22 +51,36 @@ namespace RayTracing
 
             if (command.Equals("size"))
             {
+                Console.WriteLine("Size Command");
                 Screen.width = (int)param[0];
                 Screen.height = (int)param[1];
             }
 
             else if (command.Equals("camera"))
             {
-                Camera = new Camera(param);
+                Console.WriteLine("Camera Command");
+                this.Camera = new Camera(param);
             }
 
             else if (command.Equals("sphere"))
             {
-                ObjectList.Add((Object)new Sphere(new Vector(param[0], param[1], param[2]), param[3]));
+                Console.WriteLine("Sphere Command");
+                this.ObjectList.Add((Object)new Sphere(new Vector(param[0], param[1], param[2]), param[3]));
             }
 
             else
                 return;
+        }
+
+        public void PrintContent()
+        {
+            foreach (Object obj in this.ObjectList)
+            {
+                obj.GetObjectType();
+            }
+            this.Camera.GetVectorU().PrintVector();
+            this.Camera.GetVectorV().PrintVector();
+            this.Camera.GetVectorW().PrintVector();
         }
     }
 }
