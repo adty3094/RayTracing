@@ -12,7 +12,7 @@ namespace RayTracing
     {
         static void Main(string[] args)
         {
-            string inputFile = "scene1.test";
+            string inputFile = "testscenes/scene1.test";
             string  outputFile = "hore.bmp";
 
             if(File.Exists(inputFile))
