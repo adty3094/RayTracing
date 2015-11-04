@@ -46,12 +46,16 @@ namespace RayTracing
 
         public static Bitmap RayTrace(Scene scene)
         {
-            Bitmap bmp = new Bitmap(Screen.width,Screen.height);
-            for(int i = 0; i < Screen.height; i++)
+            ViewPlane viewPlane = new ViewPlane(Screen.width, Screen.height, scene.Camera);
+            Bitmap bmp = new Bitmap(viewPlane.PixelWidth, viewPlane.PixelHeight);
+            for(int i = 0; i < viewPlane.PixelHeight ; i++)
             {
-                for (int j = 0; j < Screen.width; j++)
+                for (int j = 0; j < viewPlane.PixelWidth ; j++)
                 {
-                    Ray ray = RayThruPixels(scene.Camera, i, j);
+                    Ray ray = new Ray(); //RayThruPixels(scene.Camera, i, j);
+                    ray.Position = scene.Camera.GetLookFrom();
+                    ray.Direction = (ray.Position - viewPlane.GetNewLocation(i, j));
+                    ray.Direction /= ray.Direction.Distance();
                     Intersection(ray, scene);
                     //ray.GetInformation();
                     if (ray.IntersectWith != null)

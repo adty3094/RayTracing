@@ -53,6 +53,7 @@
     <Compile Include="Shape\Sphere.cs" />
     <Compile Include="Shape\Triangle.cs" />
     <Compile Include="Data Type\Vector.cs" />
+    <Compile Include="ViewPlane.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

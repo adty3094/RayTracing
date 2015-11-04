@@ -10,7 +10,21 @@ namespace RayTracing
     public class Ray
     {
         private Vector position;
+
+        public Vector Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
         private Vector direction;
+
+        public Vector Direction
+        {
+            get { return direction; }
+            set { direction = value; }
+        }
+
         private Color color;
 
         public Color Color
@@ -39,7 +53,11 @@ namespace RayTracing
 
 
         public Ray()
-        { }
+        {
+            this.intersectDistance = double.MaxValue;
+            this.IntersectWith = null;
+            this.color = Color.FromArgb(0, 0, 0);
+        }
 
         public Ray(Vector position, Vector direction)
         {
