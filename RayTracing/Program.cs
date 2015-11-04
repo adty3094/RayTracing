@@ -13,14 +13,16 @@ namespace RayTracing
         static void Main(string[] args)
         {
             string inputFile = "scene1.test";
-            string outputFile = "hore.bmp";
+            string  outputFile = "hore.bmp";
 
             if(File.Exists(inputFile))
             {
                 Scene scene = new Scene(inputFile);
                 //scene.PrintContent();
                 Bitmap output = new Bitmap(Func.RayTrace(scene));
+                output.SetResolution(1, 1);
                 output.Save(outputFile);
+                output.Dispose();
             }
             Console.WriteLine("Udah slese bro");
             Console.ReadKey();
