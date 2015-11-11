@@ -11,16 +11,7 @@ namespace RayTracing
     {
         private Vector pointA;
         private Vector pointB;
-        private Vector pointC;
-
-        private Matrices transform;
-
-        public Matrices Transform
-        {
-            get { return transform; }
-            set { transform = value; }
-        }
-        
+        private Vector pointC;        
 
         public Triangle(Vector pointA, Vector pointB, Vector pointC, Matrices transform, Color color)
             :base(transform,color)
@@ -42,7 +33,7 @@ namespace RayTracing
             if (PointInTriangle(pointT))
             {
                 Vector temp1 = ray.Direction * t;
-                Matrices temp2 = new Matrices(temp1.x, temp1.y, temp1.z, 0);
+                Matrices temp2 = new Matrices(temp1.x, temp1.y, temp1.z, 1);
                 temp2 = transform.Matrix * temp2;
                 temp1.x = temp2.Matrix[0, 0];
                 temp1.y = temp2.Matrix[1, 0];

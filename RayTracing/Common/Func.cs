@@ -49,6 +49,9 @@ namespace RayTracing
                 //        Console.Write("\t" + obj.Transform.Invers[i,j]);
                 //    Console.WriteLine();
                 //}
+                //Console.WriteLine();
+                //Console.WriteLine("---------------------------------");
+                //Console.WriteLine();
                 //Console.ReadKey();
 
                 Matrices pos = new Matrices(ray.Position.x, ray.Position.y, ray.Position.z, 1);

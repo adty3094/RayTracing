@@ -54,7 +54,6 @@ namespace RayTracing
         {
             if (fullcommand.Contains('#'))
                 return;
-            bool pushTransform = false;
             fullcommand = fullcommand.Trim();
             String[] words = fullcommand.Split(' ');
             String command = words[0];
@@ -106,25 +105,24 @@ namespace RayTracing
 
             else if (command.Equals("pushTransform"))
             {
-                pushTransform = true;
+                
             }
 
             else if(command.Equals("popTransform"))
             {
-                pushTransform = false;
                 this.transformMatrix = new Matrices(4, 4);
             }
 
             else if (command.Equals("translate") || command.Equals("scale")) 
             {
                 Matrices temp = new Matrices(words[0] ,param[0], param[1], param[2]);
-                this.transformMatrix = temp * this.transformMatrix;
+                this.transformMatrix = this.transformMatrix * temp;
             }
 
             else if (command.Equals("rotate"))
             {
                 Matrices temp = new Matrices((int)param[0], (int)param[1], (int)param[2], param[3]);
-                this.transformMatrix = temp * this.transformMatrix;
+                this.transformMatrix = this.transformMatrix * temp;
             }
             
             else if(command.Equals("ambient"))

@@ -14,28 +14,28 @@ namespace RayTracing
             get { return matrix; }
             set { matrix = value; }
         }
-        private int row;
+        private int _row;
 
         public int Row
         {
-            get { return row; }
-            set { row = value; }
+            get { return _row; }
+            set { _row = value; }
         }
 
-        private int col;
+        private int _col;
 
         public int Col
         {
-            get { return col; }
-            set { col = value; }
+            get { return _col; }
+            set { _col = value; }
         }
 
-        private double[,] invers;
+        private double[,] _invers;
 
         public double[,] Invers
         {
-            get { return invers; }
-            set { invers = value; }
+            get { return _invers; }
+            set { _invers = value; }
         }
 
         private bool isInvertable;
@@ -49,7 +49,6 @@ namespace RayTracing
                       {0   ,1.0 ,0   ,y},
                       {0   ,0   ,1.0 ,z},
                       {0   ,0   ,0   ,1.0} };
-                row = col = 4;
             }
             else if (command.Equals("scale"))
             {
@@ -59,15 +58,15 @@ namespace RayTracing
                       {0 ,y ,0 ,0  },
                       {0 ,0 ,z ,0  },
                       {0 ,0 ,0 ,1.0} };
-                row = col = 4;
             }
+            this.Row = this.Col = 4;
             this.isInvertable = true;
         }
 
         public Matrices(int row, int col)
         {
-            this.row = row;
-            this.col = col;
+            this.Row = row;
+            this.Col = col;
             this.matrix = new double[row, col];
             if(row == col)
             {
@@ -91,7 +90,7 @@ namespace RayTracing
                       {0    ,cos  ,-sin ,0  },
                       {0    ,sin  ,cos  ,0  },
                       {0    ,0    ,0    ,1.0} };
-                row = col = 4;
+                this.Row = this.Col = 4;
             }
             else if (y == 1)
             {
@@ -100,7 +99,7 @@ namespace RayTracing
                       {0    ,1.0  ,0    ,0  },
                       {-sin ,0    ,cos  ,0  },
                       {0    ,0    ,0    ,1.0} };
-                row = col = 4;
+                this.Row = this.Col = 4;
             }
             else if (z == 1)
             {
@@ -109,7 +108,7 @@ namespace RayTracing
                       {sin  ,cos  ,0    ,0  },
                       {0    ,0    ,1.0  ,0  },
                       {0    ,0    ,0    ,1.0} };
-                row = col = 4;
+                this.Row = this.Col = 4;
             }
             this.isInvertable = true;
         }
@@ -121,8 +120,8 @@ namespace RayTracing
                   {b},
                   {c},
                   {d}};
-            this.row = 4;
-            this.col = 1;
+            this.Row = 4;
+            this.Col = 1;
             this.isInvertable = false;
         }
 
@@ -218,17 +217,15 @@ namespace RayTracing
            
             for(int row = 0 ; row < hasil.Row ; row++)
             {
-                for(int col = 0 ; col < hasil.col ; col++)
+                for(int col = 0 ; col < hasil.Col ; col++)
                 {
-                    double temp = new double();
+                    hasil.Matrix[row, col] = 0;
                     for(int count = 0 ; count < matrix1.Col ; count++)
                     {
-                        temp += matrix1.Matrix[row, count] * matrix2.Matrix[count, col];
+                        hasil.Matrix[row,col] += matrix1.Matrix[row, count] * matrix2.Matrix[count, col];
                     }
-                    hasil.Matrix[row, col] = temp;
                 }
             }
-
             return hasil;
         }
 
@@ -238,7 +235,7 @@ namespace RayTracing
 
             for (int row = 0; row < hasil.Row; row++)
             {
-                for (int col = 0; col < hasil.col; col++)
+                for (int col = 0; col < hasil.Col; col++)
                 {
                     hasil.Matrix[row, col] = matrix1.Matrix[row, col] / n;
                 }
@@ -253,7 +250,7 @@ namespace RayTracing
 
             for (int row = 0; row < hasil.Row; row++)
             {
-                for (int col = 0; col < hasil.col; col++)
+                for (int col = 0; col < hasil.Col; col++)
                 {
                     hasil.Matrix[row, col] = matrix1.Matrix[row, col] * n;
                 }
