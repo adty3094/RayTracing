@@ -9,16 +9,26 @@ namespace RayTracing
 {
     public class Sphere : Object
     {
-        Vector center;
-        double radius;
+        private Vector center;
+        private double radius;
 
-        public Sphere(Vector center, double radius)
+        private Matrices transform;
+
+        public Matrices Transform
+        {
+            get { return transform; }
+            set { transform = value; }
+        }
+        
+
+        public Sphere(Vector center, double radius,Matrices transform, Color color)
+            : base(transform,color)
         {
             this.center = center;
             this.radius = radius;
         }
 
-        public override bool IsIntersect(ref Ray ray)
+        public override bool IsIntersect(Ray ray, Matrices transform)
         {
             double a = Vector.DotProduct(ray.GetDirection(), ray.GetDirection());
             double b = 2 * Vector.DotProduct((ray.GetPosition() - this.center), ray.GetDirection());
@@ -38,7 +48,14 @@ namespace RayTracing
                 t[1] = -b - Math.Sqrt(D) / (2 * a);
                 if (t[0] > 0 && t[1] > 0)
                 {
-                    ray.IntersectDistance = Math.Min(t[0], t[1]);
+                    Vector temp1 = ray.Direction * Math.Min(t[0], t[1]);
+                    Matrices temp2 = new Matrices(temp1.x, temp1.y, temp1.z, 0);
+                    temp2 = transform.Matrix * temp2;
+                    temp1.x = temp2.Matrix[0, 0];
+                    temp1.y = temp2.Matrix[1, 0];
+                    temp1.z = temp2.Matrix[2, 0];
+                    ray.IntersectDistance = temp1.Distance();
+                    //ray.IntersectDistance = Math.Min(t[0], t[1]);
                     return true;
                 }
                 else if (t[0] < 0 && t[1] > 0)

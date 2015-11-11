@@ -8,7 +8,29 @@ namespace RayTracing
 {
     public class Vector
     {
-        double x, y, z;
+        private double X;
+
+        public double x
+        {
+            get { return X; }
+            set { X = value; }
+        }
+
+        private double Y;
+
+        public double y
+        {
+            get { return Y; }
+            set { Y = value; }
+        }
+
+        private double Z;
+
+        public double z
+        {
+            get { return Z; }
+            set { Z = value; }
+        }
 
         public Vector()
         {
@@ -75,7 +97,7 @@ namespace RayTracing
             return new Vector(u.x / n, u.y / n, u.z / n);
         }
 
-        public static Vector operator /(double n, Vector u)
+        public static Vector operator/(double n, Vector u)
         {
             return new Vector(u.x / n, u.y / n, u.z / n);
         }

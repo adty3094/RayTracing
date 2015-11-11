@@ -34,11 +34,65 @@ namespace RayTracing
             double mindist = double.MaxValue;
             foreach(Object obj in scene.ObjectList)
             {
-                if (obj.IsIntersect(ref ray) && ray.IntersectDistance < mindist)
+                //for (int i = 0; i < obj.Transform.Matrix.GetLength(0); i++)
+                //{
+                //    for (int j = 0; j < obj.Transform.Matrix.GetLength(1); j++)
+                //        Console.Write("\t" + obj.Transform.Matrix[i, j]);
+                //    Console.WriteLine();
+                //}
+                //
+                //Console.WriteLine();
+                //
+                //for(int i = 0 ; i < obj.Transform.Invers.GetLength(0) ; i++)
+                //{
+                //    for(int j = 0 ; j < obj.Transform.Invers.GetLength(1) ; j++)
+                //        Console.Write("\t" + obj.Transform.Invers[i,j]);
+                //    Console.WriteLine();
+                //}
+                //Console.ReadKey();
+
+                Matrices pos = new Matrices(ray.Position.x, ray.Position.y, ray.Position.z, 1);
+
+                //Console.WriteLine(pos.Matrix[0, 0] + " " + pos.Matrix[1, 0] + " " + pos.Matrix[2, 0] + " " + pos.Matrix[3, 0]);
+
+                pos = obj.Transform.Invers * pos;
+
+                //Console.WriteLine(pos.Matrix[0, 0] + " " + pos.Matrix[1, 0] + " " + pos.Matrix[2, 0] + " " + pos.Matrix[3, 0]);
+                //Console.ReadKey();
+
+                Matrices dir = new Matrices(ray.Direction.x, ray.Direction.y, ray.Direction.z, 0);
+                dir = obj.Transform.Invers * dir;
+
+                //Debug--------------------------------------------------
+                //Console.WriteLine(ray.Position.x + " " + ray.Position.y + " " + ray.Position.z);
+                //Console.WriteLine(pos.Matrix[0, 0] + " " + pos.Matrix[1, 0] + " " + pos.Matrix[2, 0]);
+                //Console.ReadKey();
+                //-------------------------------------------------------
+
+                ray.Position.x = pos.Matrix[0,0];
+                ray.Position.y = pos.Matrix[1,0];
+                ray.Position.z = pos.Matrix[2,0];
+
+                ray.Direction.x = dir.Matrix[0, 0];
+                ray.Direction.y = dir.Matrix[1, 0];
+                ray.Direction.z = dir.Matrix[2, 0];
+
+                if (obj.IsIntersect(ray,obj.Transform) && ray.IntersectDistance < mindist)
                 {
                     mindist = ray.IntersectDistance;
                     ray.IntersectWith = obj;
                 }
+                // kali transform biasa ray direction(1) + position(0)
+                pos = obj.Transform.Matrix * pos;
+                dir = obj.Transform.Matrix * dir;
+
+                ray.Position.x = pos.Matrix[0, 0];
+                ray.Position.y = pos.Matrix[1, 0];
+                ray.Position.z = pos.Matrix[2, 0];
+
+                ray.Direction.x = dir.Matrix[0, 0];
+                ray.Direction.y = dir.Matrix[1, 0];
+                ray.Direction.z = dir.Matrix[2, 0];
             }
             ray.IntersectDistance = mindist;
             return ray;
@@ -46,16 +100,13 @@ namespace RayTracing
 
         public static Bitmap RayTrace(Scene scene)
         {
-            ViewPlane viewPlane = new ViewPlane(Screen.width, Screen.height, scene.Camera);
-            Bitmap bmp = new Bitmap(viewPlane.PixelWidth, viewPlane.PixelHeight);
-            for(int i = 0; i < viewPlane.PixelHeight ; i++)
+            Bitmap bmp = new Bitmap(Screen.width, Screen.height);
+            for(int i = 0; i < Screen.height ; i++)
             {
-                for (int j = 0; j < viewPlane.PixelWidth ; j++)
+                for (int j = 0; j < Screen.width ; j++)
                 {
-                    Ray ray = new Ray(); //RayThruPixels(scene.Camera, i, j);
-                    ray.Position = scene.Camera.GetLookFrom();
-                    ray.Direction = (ray.Position - viewPlane.GetNewLocation(i, j));
-                    ray.Direction /= ray.Direction.Distance();
+                    Ray ray =  RayThruPixels(scene.Camera, i, j);
+                    //ray.GetInformation();
                     Intersection(ray, scene);
                     //ray.GetInformation();
                     if (ray.IntersectWith != null)

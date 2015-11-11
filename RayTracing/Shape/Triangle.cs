@@ -13,14 +13,24 @@ namespace RayTracing
         private Vector pointB;
         private Vector pointC;
 
-        public Triangle(Vector pointA, Vector pointB, Vector pointC)
+        private Matrices transform;
+
+        public Matrices Transform
+        {
+            get { return transform; }
+            set { transform = value; }
+        }
+        
+
+        public Triangle(Vector pointA, Vector pointB, Vector pointC, Matrices transform, Color color)
+            :base(transform,color)
         {
             this.pointA = pointA;
             this.pointB = pointB;
             this.pointC = pointC;
         }
 
-        public override bool IsIntersect(ref Ray ray)
+        public override bool IsIntersect(Ray ray, Matrices transform)
         {
             Vector temp = Vector.CrossProduct((this.pointC - this.pointA),(this.pointB - this.pointA));
             Vector n = temp / temp.Distance();
@@ -31,8 +41,15 @@ namespace RayTracing
             Vector pointT = ray.GetPosition() + (ray.GetDirection() * t);
             if (PointInTriangle(pointT))
             {
-                ray.IntersectDistance = t;
-                ray.IntersectWith = this;
+                Vector temp1 = ray.Direction * t;
+                Matrices temp2 = new Matrices(temp1.x, temp1.y, temp1.z, 0);
+                temp2 = transform.Matrix * temp2;
+                temp1.x = temp2.Matrix[0, 0];
+                temp1.y = temp2.Matrix[1, 0];
+                temp1.z = temp2.Matrix[2, 0];
+                ray.IntersectDistance = temp1.Distance() ;
+                //ray.IntersectDistance = t ;
+                //ray.IntersectWith = this;
                 return true;
             }
             else return false;

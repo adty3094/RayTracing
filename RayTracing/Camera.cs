@@ -64,7 +64,8 @@ namespace RayTracing
 
         private double CalculateFOVX()
         {
-            return (Screen.width / Screen.height) * (Math.Tan(Func.DegreeToRadian(this.fovy)/2)); 
+            Console.WriteLine(Screen.width + " " + Screen.height);
+            return ((double)Screen.width / (double)Screen.height) * (Math.Tan(Func.DegreeToRadian(this.fovy)/2)); 
         }
 
         public Vector GetVectorU()

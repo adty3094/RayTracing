@@ -17,12 +17,24 @@ namespace RayTracing
             set { color = value; }
         }
 
+        private Matrices _transform;
 
-        public Object()
+        public Matrices Transform
         {
-            Color = Color.Red;
+            get { return _transform; }
+            set { _transform = value; }
         }
-        public abstract bool IsIntersect(ref Ray ray);
+        
+
+        public Object(Matrices transform, Color color)
+        {
+            this.Color = color;
+            this.Transform = new Matrices(4,4);
+            this.Transform.Matrix = (transform * new Matrices(4, 4)).Matrix ;
+            this.Transform.Invers = Matrices.InversCalculate(transform.Matrix);
+//            this.Transform = temp
+        }
+        public abstract bool IsIntersect(Ray ray, Matrices transform);
         public abstract void GetObjectType();
     }
 }
